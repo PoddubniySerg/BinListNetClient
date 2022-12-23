@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">BinList</string>
+    <string name="text_input_layout_hint">Enter the first digits of a card number (BIN/IIN)</string>
+    <string name="button_check_bin_text">Check BIN</string>
+    <string name="scheme_network_header_text">SCHEME / NETWORK</string>
+    <string name="brand_header_text">BRAND</string>
+    <string name="card_number_header_text">CARD NUMBER</string>
+    <string name="length_header_text">LENGTH</string>
+    <string name="luhn_header_text">LUHN</string>
+    <string name="slash_text">/</string>
+    <string name="type_header_text">TYPE</string>
+    <string name="prepaid_header_text">PREPAID</string>
+    <string name="country_header_text">COUNTRY</string>
+    <string name="latitude__header_text">(latitude:</string>
+    <string name="longitude_header_text">, longitude:</string>
+    <string name="closing_bracket">)</string>
+    <string name="bank_header_text">BANK</string>
+    <string name="floating_add_request_button_description">new request</string>
+</resources>
