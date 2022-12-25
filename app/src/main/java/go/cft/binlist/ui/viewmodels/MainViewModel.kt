@@ -10,6 +10,7 @@ import go.cft.domain.models.entity.ListItemBinList
 import go.cft.domain.models.params.*
 import go.cft.domain.usecases.*
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -58,12 +59,14 @@ class MainViewModel @Inject constructor() : ViewModel() {
     fun loadBins() {
         viewModelScope.launch {
             try {
-                _loadingState.value = LoadingState.IsLoading
+//                _loadingState.value = LoadingState.IsLoading
+                _loadingState.value = LoadingState.StartingApp
                 _binListFlow.value = getBinsListUseCase.execute().result
             } catch (ex: Exception) {
                 _errorFlow.send(ex)
             } finally {
-                _loadingState.value = LoadingState.Loaded
+                _loadingState.value = LoadingState.StartedApp
+//                _loadingState.value = LoadingState.Loaded
             }
         }
     }

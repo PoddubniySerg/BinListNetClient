@@ -55,6 +55,8 @@ dependencies {
 //    hilt for DI (внедрение зависимостей)
     implementation 'com.google.dagger:hilt-android:2.44.2'
     kapt 'com.google.dagger:hilt-compiler:2.44.2'
+//    lottie
+    implementation 'com.airbnb.android:lottie:5.2.0'
 
     implementation project(path: ':domain')
     implementation project(path: ':data')

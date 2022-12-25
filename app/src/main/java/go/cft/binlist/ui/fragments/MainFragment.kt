@@ -8,8 +8,8 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import go.cft.binlist.R
@@ -41,11 +41,16 @@ class MainFragment : Fragment() {
         { item -> removeItem(item) }
     )
 
-    private val viewModel by viewModels<MainViewModel>()
+    private val viewModel by activityViewModels<MainViewModel>()
     private var binding: FragmentMainBinding? = null
 
     @Inject
     lateinit var converter: Converter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (savedInstanceState == null) viewModel.loadBins()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -105,10 +110,23 @@ class MainFragment : Fragment() {
                 when (it) {
                     is LoadingState.IsLoading -> binding?.progressBar?.isVisible = true
                     is LoadingState.Loaded -> binding?.progressBar?.isVisible = false
+                    is LoadingState.StartedApp -> {
+                        binding?.progressBar?.isVisible = false
+                    }
+                    is LoadingState.StartingApp -> {
+                        parentFragmentManager.commit(allowStateLoss = true) {
+                            addToBackStack(this.toString())
+                            setCustomAnimations(
+                                R.anim.enter_fragment_animation,
+                                R.anim.exit_fragment_animation,
+                                R.anim.enter_fragment_animation,
+                                R.anim.exit_fragment_animation
+                            )
+                            replace(R.id.container, WelcomeFragment.newInstance())
+                        }
+                    }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
-
-            viewModel.loadBins()
         }
     }
 
@@ -157,6 +175,12 @@ class MainFragment : Fragment() {
         }
         parentFragmentManager.commit {
             addToBackStack(this.toString())
+            setCustomAnimations(
+                R.anim.enter_fragment_animation,
+                R.anim.exit_fragment_animation,
+                R.anim.enter_fragment_animation,
+                R.anim.exit_fragment_animation
+            )
             replace(R.id.container, BinListDetailsFragment::class.java, args)
         }
     }
