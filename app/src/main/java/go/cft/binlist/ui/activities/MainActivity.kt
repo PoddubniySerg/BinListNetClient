@@ -1,7 +1,7 @@
 package go.cft.binlist.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import go.cft.binlist.R
 import go.cft.binlist.ui.fragments.MainFragment
@@ -17,5 +17,10 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.container, MainFragment.newInstance())
                 .commitNow()
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
     }
 }

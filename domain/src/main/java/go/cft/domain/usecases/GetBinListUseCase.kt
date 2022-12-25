@@ -5,7 +5,7 @@ import go.cft.domain.models.params.GetBinListByBinParam
 import go.cft.domain.models.params.GetBinListParam
 import go.cft.domain.models.params.IsBinSavedParam
 import go.cft.domain.models.params.SaveBinParam
-import go.cft.domain.models.results.GetBinListResult
+import go.cft.domain.models.results.GetBinList
 import go.cft.domain.repositories.BinListRepository
 import javax.inject.Inject
 
@@ -14,16 +14,17 @@ class GetBinListUseCase @Inject constructor() {
     @Inject
     lateinit var repository: BinListRepository
 
-    suspend fun execute(param: GetBinListParam): GetBinListResult {
+    suspend fun execute(param: GetBinListParam): GetBinList {
         try {
+            val isBinExist = repository.isBinSaved(IsBinSavedParam(param.bin))
             val binList =
-                repository.getBinListByBin(GetBinListByBinParam(param.bin))?.idBinList
+                repository.getBinListByBin(GetBinListByBinParam(param.bin, isBinExist))?.result
                     ?: throw GetBinListException("Null result get data by bin")
-            val isBinNotExist = repository.isBinSaved(IsBinSavedParam(binList.id)).not()
-            if (isBinNotExist) repository.saveBin(SaveBinParam(binList))
-            return GetBinListResult(binList.binList)
+            if (isBinExist.not()) repository.saveBin(SaveBinParam(binList))
+            return GetBinList(binList)
         } catch (ex: Exception) {
-            throw GetBinListException("Error get data by bin")
+            ex.printStackTrace()
+            throw GetBinListException("BIN not found")
         }
     }
 }

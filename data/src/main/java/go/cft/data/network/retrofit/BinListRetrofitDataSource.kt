@@ -10,6 +10,6 @@ class BinListRetrofitDataSource @Inject constructor() : NetworkBinListRepository
         val responseLoader = BinListRetrofitInstance.MarsPhotosRetrofit
         val response = responseLoader?.getBinList(url)
         if (response != null && response.isSuccessful) return response.body()
-        throw RuntimeException(response?.message())
+        throw RuntimeException(response?.code().toString())
     }
 }

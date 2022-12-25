@@ -1,9 +1,9 @@
 package go.cft.domain.usecases
 
 import go.cft.domain.exceptions.GetBinsListException
-import go.cft.domain.models.results.GetBinsListResult
+import go.cft.domain.models.results.BinsList
 import go.cft.domain.repositories.BinListRepository
-import go.cft.domain.util.Sorter
+import go.cft.domain.util.Converter
 import javax.inject.Inject
 
 class GetBinsListUseCase @Inject constructor() {
@@ -12,12 +12,12 @@ class GetBinsListUseCase @Inject constructor() {
     lateinit var repository: BinListRepository
 
     @Inject
-    lateinit var sorter: Sorter
+    lateinit var converter: Converter
 
-    suspend fun execute(): GetBinsListResult {
+    suspend fun execute(): BinsList {
         try {
-            val result = sorter.sort(repository.getBinsList())
-            return GetBinsListResult(result)
+            val result = repository.getBinsList().sortedBy { it.id }
+            return BinsList(result.map { converter.convert(it) })
         } catch (ex: Exception) {
             throw GetBinsListException("Get bins data error")
         }

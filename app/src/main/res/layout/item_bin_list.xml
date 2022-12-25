@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="15dp"
-    android:background="?attr/colorButtonNormal"
     android:padding="15dp">
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -36,4 +35,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/countryTextView" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/deleteButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_baseline_delete_24"
+        app:layout_constraintBottom_toBottomOf="@+id/bankTextView"
+        app:layout_constraintEnd_toEndOf="@+id/countryTextView"
+        app:layout_constraintTop_toTopOf="@+id/binTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

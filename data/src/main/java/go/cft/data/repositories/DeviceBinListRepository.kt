@@ -6,7 +6,11 @@ interface DeviceBinListRepository {
 
     suspend fun getBinsList(): List<IdBinList>
 
-    fun isBinSaved(bin: String): Boolean
+    suspend fun getBinListByBin(bin: String): IdBinList
+
+    suspend fun isBinSaved(bin: String): Boolean
 
     suspend fun saveBin(mainBinList: IdBinList)
+
+    suspend fun removeBin(bin: String)
 }

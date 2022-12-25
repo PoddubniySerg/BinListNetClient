@@ -1,7 +1,7 @@
 package go.cft.domain.usecases
 
 import go.cft.domain.models.params.BinValidateParam
-import go.cft.domain.models.results.BinValidateResult
+import go.cft.domain.models.results.BinIsValid
 import javax.inject.Inject
 
 class BinValidateUseCase @Inject constructor() {
@@ -13,15 +13,19 @@ class BinValidateUseCase @Inject constructor() {
 
     private val regex = "^[0-9]+\$".toRegex()
 
-    fun execute(param: BinValidateParam): BinValidateResult {
+    fun execute(param: BinValidateParam): BinIsValid {
         return try {
             val bin = param.bin
-            val binIsValid =
-                        bin.length in MIN_SIZE_BIN..MAX_SIZE_BIN &&
-                        regex.matches(bin)
-            BinValidateResult(binIsValid)
+            var binIsValid = false
+            bin?.let {
+                binIsValid =
+                    bin.isEmpty() ||
+                            bin.length in MIN_SIZE_BIN..MAX_SIZE_BIN &&
+                            regex.matches(bin)
+            }
+            BinIsValid(binIsValid)
         } catch (e: Exception) {
-            BinValidateResult(binIsValid = false)
+            BinIsValid(result = false)
         }
     }
 }

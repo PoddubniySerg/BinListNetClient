@@ -16,4 +16,5 @@
     <string name="closing_bracket">)</string>
     <string name="bank_header_text">BANK</string>
     <string name="floating_add_request_button_description">new request</string>
+    <string name="bin_header_text">BIN</string>
 </resources>

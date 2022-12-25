@@ -14,15 +14,17 @@ class Converter @Inject constructor() {
 
     fun convert(binList: IdBinList): BinListEntity {
         val properties = binList.binList
+        val id = binList.id ?: throw RuntimeException("Id can not be null")
+
         return BinListEntity(
-            binList.id,
-            convert(properties.number),
-            properties.scheme,
-            properties.type,
-            properties.brand,
-            properties.prepaid,
-            convert(properties.country),
-            convert(properties.bank)
+            id,
+            convert(properties?.number),
+            properties?.scheme,
+            properties?.type,
+            properties?.brand,
+            properties?.prepaid,
+            convert(properties?.country),
+            convert(properties?.bank)
         )
     }
 

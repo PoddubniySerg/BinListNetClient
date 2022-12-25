@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bin_header_text" />
+
+        <TextView
+            android:id="@+id/binTextView"
+            style="@style/TextAppearance.AppCompat.SearchResult.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:text="4571 7360" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scheme_network_header_text" />
+
+        <TextView
+            android:id="@+id/schemeNetworkTextView"
+            style="@style/TextAppearance.AppCompat.SearchResult.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:text="Visa" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/brand_header_text" />
+
+        <TextView
+            android:id="@+id/brandTextView"
+            style="@style/TextAppearance.AppCompat.SearchResult.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:text="Visa/Dankort" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/card_number_header_text" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:scaleX="0.5"
+                    android:scaleY="0.5"
+                    android:text="@string/length_header_text" />
+
+                <TextView
+                    android:id="@+id/cardNumberLengthTextView"
+                    style="@style/TextAppearance.AppCompat.SearchResult.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="16" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleX="0.5"
+                    android:scaleY="0.5"
+                    android:text="@string/luhn_header_text" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/cardNumberLuhnYesTextView"
+                        style="@style/TextAppearance.AppCompat.SearchResult.Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yes" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:scaleY="3"
+                        android:text="@string/slash_text" />
+
+                    <TextView
+                        android:id="@+id/cardNumberLuhnNoTextView"
+                        android:layout_width="wrap_content"
+                        style="@style/TextAppearance.AppCompat"
+                        android:layout_height="wrap_content"
+                        android:text="No" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/type_header_text" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/typeDebitTextView"
+                style="@style/TextAppearance.AppCompat.SearchResult.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Debit" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:scaleY="3"
+                android:text="@string/slash_text" />
+
+            <TextView
+                android:id="@+id/typeCreditTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Credit"
+                style="@style/TextAppearance.AppCompat"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/prepaid_header_text" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/prepaidYesTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yes"
+                style="@style/TextAppearance.AppCompat"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:scaleY="3"
+                android:text="@string/slash_text" />
+
+            <TextView
+                android:id="@+id/prepaidNoTextView"
+                style="@style/TextAppearance.AppCompat.SearchResult.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/country_header_text" />
+
+        <TextView
+            android:id="@+id/countryEmojiAndNameTextView"
+            style="@style/TextAppearance.AppCompat.SearchResult.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:text="🇩🇰 Denmark"
+            android:textSize="20sp" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:text="@string/latitude__header_text" />
+
+            <TextView
+                android:id="@+id/countryLatitudeTextView"
+                style="@style/TextAppearance.AppCompat.SearchResult.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="56"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:text="@string/longitude_header_text" />
+
+            <TextView
+                android:id="@+id/countryLongitudeTextView"
+                style="@style/TextAppearance.AppCompat.SearchResult.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:text="@string/closing_bracket" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bank_header_text" />
+
+        <TextView
+            android:id="@+id/bankNameAndCityTextView"
+            style="@style/TextAppearance.AppCompat.SearchResult.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jyske Bank, Hjørring" />
+
+        <TextView
+            android:id="@+id/bankUrlTextView"
+            style="@style/TextAppearance.AppCompat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="www.jyskebank.dk"
+            android:textColor="@color/purple_700" />
+
+        <TextView
+            android:id="@+id/bankPhoneTextView"
+            style="@style/TextAppearance.AppCompat.SearchResult.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+4589893300"
+            android:textSize="15sp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>

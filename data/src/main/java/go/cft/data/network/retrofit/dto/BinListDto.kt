@@ -9,11 +9,11 @@ import go.cft.domain.models.entity.NumberBinList
 
 @JsonClass(generateAdapter = true)
 data class BinListDto(
-    @Json(name = "number") override val number: NumberBinList?,
+    @Json(name = "number") override val number: NumberBinListDto?,
     @Json(name = "scheme") override val scheme: String?,
     @Json(name = "type") override val type: String?,
     @Json(name = "brand") override val brand: String?,
     @Json(name = "prepaid") override val prepaid: Boolean?,
-    @Json(name = "country") override val country: CountryBinList?,
-    @Json(name = "bank") override val bank: BankBinList?
+    @Json(name = "country") override val country: CountryBinListDto?,
+    @Json(name = "bank") override val bank: BankBinListDto?
 ) : BinList

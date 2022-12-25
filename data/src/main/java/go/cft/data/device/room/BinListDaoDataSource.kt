@@ -14,15 +14,16 @@ class BinListDaoDataSource @Inject constructor() : DeviceBinListRepository {
     @Inject
     lateinit var converter: Converter
 
-    override suspend fun getBinsList(): List<IdBinList> {
-        return binListDao.getBinsList().map { MainBinList(it.id, it) }
-    }
+    override suspend fun getBinsList(): List<IdBinList> =
+        binListDao.getBinsList().map { MainBinList(it.id, it) }
 
-    override fun isBinSaved(bin: String): Boolean {
-        return binListDao.isBinSaved(bin)
-    }
+    override suspend fun getBinListByBin(bin: String): IdBinList =
+        MainBinList(bin, binListDao.getBinListByBin(bin))
 
-    override suspend fun saveBin(mainBinList: IdBinList) {
+    override suspend fun isBinSaved(bin: String): Boolean = binListDao.isBinSaved(bin)
+
+    override suspend fun saveBin(mainBinList: IdBinList) =
         binListDao.save(converter.convert(mainBinList))
-    }
+
+    override suspend fun removeBin(bin: String) = binListDao.remove(bin)
 }
