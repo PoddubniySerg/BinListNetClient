@@ -158,10 +158,8 @@ class MainFragment : Fragment() {
         parentFragmentManager.commit {
             addToBackStack(this.toString())
             setCustomAnimations(
-                R.anim.enter_fragment_animation,
-                R.anim.exit_fragment_animation,
-                R.anim.enter_fragment_animation,
-                R.anim.exit_fragment_animation
+                android.R.anim.slide_out_right,
+                android.R.anim.slide_out_right
             )
             replace(R.id.container, BinListDetailsFragment::class.java, args)
         }
