@@ -39,7 +39,7 @@ class WelcomeFragment @Inject constructor() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.loadingState.onEach {
-            delay(1500)
+            delay(1000)
             when (it) {
                 is LoadingState.StartedApp -> {
                     while (parentFragmentManager.isStateSaved) delay(2000)

@@ -83,7 +83,6 @@ class MainFragment : Fragment() {
         }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         with(binding!!) {
-
             textInputBin.doOnTextChanged { bin, start, _, count ->
                 bin?.let {
                     val id = getIdFromBin(it)
@@ -94,12 +93,8 @@ class MainFragment : Fragment() {
             }
 
             checkBinButton.setOnClickListener {
-                binding?.textInputLayout?.let { textInputLayout ->
-                    binding?.textInputBin?.text?.let { text ->
-                        if (textInputLayout.isErrorEnabled.not())
-                            viewModel.checkBinButtonOnClick(getIdFromBin(text).toString())
-                    }
-                }
+                if (textInputLayout.isErrorEnabled.not())
+                    viewModel.checkBinButtonOnClick(getIdFromBin(textInputBin.text.toString()).toString())
             }
 
             viewModel.errorFlow.onEach {
@@ -108,23 +103,10 @@ class MainFragment : Fragment() {
 
             viewModel.loadingState.onEach {
                 when (it) {
-                    is LoadingState.IsLoading -> binding?.progressBar?.isVisible = true
-                    is LoadingState.Loaded -> binding?.progressBar?.isVisible = false
-                    is LoadingState.StartedApp -> {
-                        binding?.progressBar?.isVisible = false
-                    }
-                    is LoadingState.StartingApp -> {
-                        parentFragmentManager.commit(allowStateLoss = true) {
-                            addToBackStack(this.toString())
-                            setCustomAnimations(
-                                R.anim.enter_fragment_animation,
-                                R.anim.exit_fragment_animation,
-                                R.anim.enter_fragment_animation,
-                                R.anim.exit_fragment_animation
-                            )
-                            replace(R.id.container, WelcomeFragment.newInstance())
-                        }
-                    }
+                    is LoadingState.IsLoading -> loadStart()
+                    is LoadingState.Loaded -> loadStop()
+                    is LoadingState.StartedApp -> loadStop()
+                    is LoadingState.StartingApp -> goToWelcomeFragment()
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
         }
@@ -186,10 +168,49 @@ class MainFragment : Fragment() {
     }
 
     private fun onItemClick(item: ListItemBinList) {
-        viewModel.onItemClick(getIdFromBin(item.bin).toString())
+        binding?.let {
+            if (it.recyclerView.isClickable)
+                viewModel.onItemClick(getIdFromBin(item.bin).toString())
+        }
     }
 
     private fun removeItem(item: ListItemBinList) {
         viewModel.removeBinList(getIdFromBin(item.bin).toString())
+    }
+
+    private fun loadStart() {
+        binding?.let {
+            with(it) {
+                progressBar.isVisible = true
+                checkBinButton.isEnabled = false
+//                textInputLayout.isEnabled = false
+                recyclerView.isClickable = false
+            }
+        }
+
+    }
+
+    private fun loadStop() {
+        binding?.let {
+            with(it) {
+                progressBar.isVisible = false
+                checkBinButton.isEnabled = true
+//                textInputLayout.isEnabled = true
+                recyclerView.isClickable = true
+            }
+        }
+    }
+
+    private fun goToWelcomeFragment() {
+        parentFragmentManager.commit(allowStateLoss = true) {
+            addToBackStack(this.toString())
+            setCustomAnimations(
+                R.anim.enter_fragment_animation,
+                R.anim.exit_fragment_animation,
+                R.anim.enter_fragment_animation,
+                R.anim.exit_fragment_animation
+            )
+            replace(R.id.container, WelcomeFragment.newInstance())
+        }
     }
 }
