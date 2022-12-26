@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BinList</string>
+    <string name="app_name">BINLIST.NET</string>
     <string name="text_input_layout_hint">Enter the first digits of a card number (BIN/IIN)</string>
     <string name="button_check_bin_text">Check BIN</string>
     <string name="scheme_network_header_text">SCHEME / NETWORK</string>
