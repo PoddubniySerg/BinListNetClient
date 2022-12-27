@@ -9,8 +9,8 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import go.cft.binlist.R
 import go.cft.binlist.databinding.FragmentMainBinding
@@ -32,8 +32,6 @@ open class MainFragment : Fragment() {
         private const val TEXT_SEPARATOR = ' '
         private const val BIN_SECTION_SIZE = 4
         const val ID_BIN_LIST_ARG_KEY = "id_bin_list"
-
-        fun newInstance() = MainFragment()
     }
 
     private val adapter = BinsListAdapter(
@@ -46,11 +44,6 @@ open class MainFragment : Fragment() {
 
     private val viewModel by activityViewModels<MainViewModel>()
     private var binding: FragmentMainBinding? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (savedInstanceState == null) viewModel.loadBins()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -110,6 +103,7 @@ open class MainFragment : Fragment() {
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
         }
+        viewModel.loadBins()
     }
 
     override fun onDestroyView() {
@@ -155,13 +149,12 @@ open class MainFragment : Fragment() {
         val args = Bundle().apply {
             putParcelable(ID_BIN_LIST_ARG_KEY, parcelAble)
         }
-        parentFragmentManager.commit {
-            addToBackStack(this.toString())
-            setCustomAnimations(
-                android.R.anim.slide_out_right,
-                android.R.anim.slide_out_right
+
+        lifecycleScope.launchWhenResumed {
+            findNavController().navigate(
+                R.id.action_MainFragment_to_BinListDetailsFragment,
+                args
             )
-            replace(R.id.container, BinListDetailsFragment::class.java, args)
         }
     }
 
@@ -181,6 +174,7 @@ open class MainFragment : Fragment() {
             with(it) {
                 progressBar.isVisible = true
                 checkBinButton.isEnabled = false
+//                textInputLayout.isEnabled = false
                 recyclerView.isClickable = false
             }
         }
@@ -198,15 +192,8 @@ open class MainFragment : Fragment() {
     }
 
     private fun goToWelcomeFragment() {
-        parentFragmentManager.commit(allowStateLoss = true) {
-            addToBackStack(this.toString())
-            setCustomAnimations(
-                R.anim.enter_fragment_animation,
-                R.anim.exit_fragment_animation,
-                R.anim.enter_fragment_animation,
-                R.anim.exit_fragment_animation
-            )
-            replace(R.id.container, WelcomeFragment.newInstance())
+        lifecycleScope.launchWhenResumed {
+            findNavController().navigate(R.id.action_MainFragment_to_WelcomeFragment)
         }
     }
 }

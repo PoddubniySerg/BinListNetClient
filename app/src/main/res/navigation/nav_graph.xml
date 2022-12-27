@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="go.cft.binlist.ui.fragments.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_MainFragment_to_BinListDetailsFragment"
+            app:destination="@id/binListDetailsFragment"
+            app:enterAnim="@android:anim/slide_out_right"
+            app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_MainFragment_to_WelcomeFragment"
+            app:destination="@id/welcomeFragment"
+            app:enterAnim="@anim/enter_fragment_animation"
+            app:exitAnim="@anim/exit_fragment_animation"
+            app:popEnterAnim="@anim/enter_fragment_animation"
+            app:popExitAnim="@anim/exit_fragment_animation" />
+    </fragment>
+    <fragment
+        android:id="@+id/binListDetailsFragment"
+        android:name="go.cft.binlist.ui.fragments.BinListDetailsFragment"
+        android:label="BinListDetailsFragment"
+        tools:layout="@layout/fragment_bin_list_details" />
+
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="go.cft.binlist.ui.fragments.WelcomeFragment"
+        android:label="WelcomeFragment"
+        tools:layout="@layout/fragment_welcome" />
+</navigation>
