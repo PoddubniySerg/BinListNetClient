@@ -1,6 +1,7 @@
 package go.cft.binlist.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +10,8 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import go.cft.binlist.R
 import go.cft.binlist.databinding.FragmentMainBinding
@@ -32,8 +33,6 @@ class MainFragment : Fragment() {
         private const val TEXT_SEPARATOR = ' '
         private const val BIN_SECTION_SIZE = 4
         const val ID_BIN_LIST_ARG_KEY = "id_bin_list"
-
-        fun newInstance() = MainFragment()
     }
 
     private val adapter = BinsListAdapter(
@@ -46,11 +45,6 @@ class MainFragment : Fragment() {
 
     @Inject
     lateinit var converter: Converter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (savedInstanceState == null) viewModel.loadBins()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -110,11 +104,14 @@ class MainFragment : Fragment() {
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
         }
+        viewModel.loadBins()
+        Log.d("MyApp", "oncreate_view")
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+        Log.d("MyApp", "ondestroy_view")
     }
 
     private fun validate(bin: CharSequence?) {
@@ -155,13 +152,12 @@ class MainFragment : Fragment() {
         val args = Bundle().apply {
             putParcelable(ID_BIN_LIST_ARG_KEY, parcelAble)
         }
-        parentFragmentManager.commit {
-            addToBackStack(this.toString())
-            setCustomAnimations(
-                android.R.anim.slide_out_right,
-                android.R.anim.slide_out_right
+
+        lifecycleScope.launchWhenResumed {
+            findNavController().navigate(
+                R.id.action_MainFragment_to_BinListDetailsFragment,
+                args
             )
-            replace(R.id.container, BinListDetailsFragment::class.java, args)
         }
     }
 
@@ -181,7 +177,6 @@ class MainFragment : Fragment() {
             with(it) {
                 progressBar.isVisible = true
                 checkBinButton.isEnabled = false
-//                textInputLayout.isEnabled = false
                 recyclerView.isClickable = false
             }
         }
@@ -193,22 +188,44 @@ class MainFragment : Fragment() {
             with(it) {
                 progressBar.isVisible = false
                 checkBinButton.isEnabled = true
-//                textInputLayout.isEnabled = true
                 recyclerView.isClickable = true
             }
         }
     }
 
     private fun goToWelcomeFragment() {
-        parentFragmentManager.commit(allowStateLoss = true) {
-            addToBackStack(this.toString())
-            setCustomAnimations(
-                R.anim.enter_fragment_animation,
-                R.anim.exit_fragment_animation,
-                R.anim.enter_fragment_animation,
-                R.anim.exit_fragment_animation
-            )
-            replace(R.id.container, WelcomeFragment.newInstance())
+        lifecycleScope.launchWhenResumed {
+            findNavController().navigate(R.id.action_MainFragment_to_WelcomeFragment)
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("MyApp", "oncreate")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("MyApp", "ondestroy")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("MyApp", "on_stop")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("MyApp", "on_start")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("MyApp", "on_pause")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("MyApp", "on_resume")
     }
 }

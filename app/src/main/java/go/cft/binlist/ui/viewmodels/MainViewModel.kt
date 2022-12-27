@@ -55,7 +55,11 @@ class MainViewModel @Inject constructor() : ViewModel() {
     private val _loadingState = MutableStateFlow<LoadingState>(LoadingState.Loaded)
     val loadingState = _loadingState.asStateFlow()
 
+    private var isStarted: Boolean = false
+
     fun loadBins() {
+        if (isStarted) return
+        isStarted = true
         viewModelScope.launch {
             try {
                 _loadingState.value = LoadingState.StartingApp

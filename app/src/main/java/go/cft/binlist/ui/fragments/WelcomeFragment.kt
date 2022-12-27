@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import go.cft.binlist.databinding.FragmentWelcomeBinding
 import go.cft.binlist.states.LoadingState
@@ -18,10 +19,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class WelcomeFragment @Inject constructor() : Fragment() {
-
-    companion object {
-        fun newInstance() = WelcomeFragment()
-    }
 
     private val viewModel by activityViewModels<MainViewModel>()
     private var binding: FragmentWelcomeBinding? = null
@@ -43,7 +40,7 @@ class WelcomeFragment @Inject constructor() : Fragment() {
             when (it) {
                 is LoadingState.StartedApp -> {
                     while (parentFragmentManager.isStateSaved) delay(2000)
-                    parentFragmentManager.popBackStack()
+                    findNavController().popBackStack()
                 }
                 else -> {
 //                    Todo nothing

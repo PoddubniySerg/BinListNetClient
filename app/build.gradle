@@ -57,6 +57,9 @@ dependencies {
     kapt 'com.google.dagger:hilt-compiler:2.44.2'
 //    lottie
     implementation 'com.airbnb.android:lottie:5.2.0'
+//    navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
 
     implementation project(path: ':domain')
     implementation project(path: ':data')
