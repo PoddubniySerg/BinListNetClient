@@ -13,6 +13,6 @@ object BinListRetrofitInstance {
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
-    val MarsPhotosRetrofit: BinListNetworkLoader? =
+    val BinListRetrofit: BinListNetworkLoader? =
         retrofit.create(BinListNetworkLoader::class.java)
 }

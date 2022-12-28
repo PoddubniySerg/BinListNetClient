@@ -6,13 +6,13 @@ import go.cft.data.util.Converter
 import go.cft.domain.models.entity.IdBinList
 import javax.inject.Inject
 
-class BinListDaoDataSource @Inject constructor() : DeviceBinListRepository {
+open class BinListDaoDataSource @Inject constructor() : DeviceBinListRepository {
 
     @Inject
-    lateinit var binListDao: BinListDao
+    protected lateinit var binListDao: BinListDao
 
     @Inject
-    lateinit var converter: Converter
+    protected lateinit var converter: Converter
 
     override suspend fun getBinsList(): List<IdBinList> =
         binListDao.getBinsList().map { MainBinList(it.id, it) }

@@ -6,10 +6,10 @@ import go.cft.domain.models.params.RemoveBinListByBinParam
 import go.cft.domain.repositories.BinListRepository
 import javax.inject.Inject
 
-class DeleteBinListUseCase @Inject constructor() {
+open class DeleteBinListUseCase @Inject constructor() {
 
     @Inject
-    lateinit var repository: BinListRepository
+    protected lateinit var repository: BinListRepository
 
     suspend fun execute(param: DeleteBinListParam) {
         try {

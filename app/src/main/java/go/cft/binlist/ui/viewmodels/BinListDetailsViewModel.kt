@@ -13,13 +13,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class BinListDetailsViewModel @Inject constructor() : ViewModel() {
+open class BinListDetailsViewModel @Inject constructor() : ViewModel() {
 
     @Inject
-    lateinit var getUriStringPhoneUseCase: GetUriStringPhoneUseCase
+    protected lateinit var getUriStringPhoneUseCase: GetUriStringPhoneUseCase
 
     @Inject
-    lateinit var getUriStringUrlUseCase: GetUriStringUrlUseCase
+    protected lateinit var getUriStringUrlUseCase: GetUriStringUrlUseCase
 
     private val _uriStringUrlFlow = Channel<String>()
     val uriStringUrlFlow = _uriStringUrlFlow.receiveAsFlow()

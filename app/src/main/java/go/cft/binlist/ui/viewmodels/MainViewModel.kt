@@ -17,28 +17,28 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor() : ViewModel() {
+open class MainViewModel @Inject constructor() : ViewModel() {
 
     @Inject
-    lateinit var binValidateUseCase: BinValidateUseCase
+    protected lateinit var binValidateUseCase: BinValidateUseCase
 
     @Inject
-    lateinit var filterByBinUseCase: FilterByBinUseCase
+    protected lateinit var filterByBinUseCase: FilterByBinUseCase
 
     @Inject
-    lateinit var getBinListUseCase: GetBinListUseCase
+    protected lateinit var getBinListUseCase: GetBinListUseCase
 
     @Inject
-    lateinit var getBinsListUseCase: GetBinsListUseCase
+    protected lateinit var getBinsListUseCase: GetBinsListUseCase
 
     @Inject
-    lateinit var binListOnClickUseCase: BinListOnClickUseCase
+    protected lateinit var binListOnClickUseCase: BinListOnClickUseCase
 
     @Inject
-    lateinit var deleteBinListUseCase: DeleteBinListUseCase
+    protected lateinit var deleteBinListUseCase: DeleteBinListUseCase
 
     @Inject
-    lateinit var converter: Converter
+    protected lateinit var converter: Converter
 
     private val _binListFlow = MutableStateFlow<List<ListItemBinList>>(emptyList())
     val binListFlow = _binListFlow.asStateFlow()

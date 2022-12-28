@@ -26,7 +26,7 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainFragment : Fragment() {
+open class MainFragment : Fragment() {
 
     companion object {
         private const val TEXT_SEPARATOR = ' '
@@ -41,11 +41,11 @@ class MainFragment : Fragment() {
         { item -> removeItem(item) }
     )
 
+    @Inject
+    protected lateinit var converter: Converter
+
     private val viewModel by activityViewModels<MainViewModel>()
     private var binding: FragmentMainBinding? = null
-
-    @Inject
-    lateinit var converter: Converter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -181,7 +181,6 @@ class MainFragment : Fragment() {
             with(it) {
                 progressBar.isVisible = true
                 checkBinButton.isEnabled = false
-//                textInputLayout.isEnabled = false
                 recyclerView.isClickable = false
             }
         }
@@ -193,7 +192,6 @@ class MainFragment : Fragment() {
             with(it) {
                 progressBar.isVisible = false
                 checkBinButton.isEnabled = true
-//                textInputLayout.isEnabled = true
                 recyclerView.isClickable = true
             }
         }

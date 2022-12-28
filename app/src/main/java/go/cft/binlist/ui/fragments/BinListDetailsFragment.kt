@@ -27,7 +27,6 @@ import javax.inject.Inject
 class BinListDetailsFragment @Inject constructor() : Fragment() {
 
     companion object {
-
         const val ID_BIN_LIST_ARG_KEY = "id_bin_list"
     }
 

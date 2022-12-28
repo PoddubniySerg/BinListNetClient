@@ -9,10 +9,10 @@ import go.cft.domain.models.results.GetBinList
 import go.cft.domain.repositories.BinListRepository
 import javax.inject.Inject
 
-class GetBinListUseCase @Inject constructor() {
+open class GetBinListUseCase @Inject constructor() {
 
     @Inject
-    lateinit var repository: BinListRepository
+    protected lateinit var repository: BinListRepository
 
     suspend fun execute(param: GetBinListParam): GetBinList {
         try {

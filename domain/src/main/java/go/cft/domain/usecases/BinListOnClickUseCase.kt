@@ -7,10 +7,10 @@ import go.cft.domain.models.results.BinListOnClicked
 import go.cft.domain.repositories.BinListRepository
 import javax.inject.Inject
 
-class BinListOnClickUseCase @Inject constructor() {
+open class BinListOnClickUseCase @Inject constructor() {
 
     @Inject
-    lateinit var repository: BinListRepository
+    protected lateinit var repository: BinListRepository
 
     suspend fun execute(param: OnBinListClickParam): BinListOnClicked {
         try {

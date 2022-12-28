@@ -7,13 +7,13 @@ import go.cft.domain.repositories.BinListRepository
 import go.cft.domain.util.Converter
 import javax.inject.Inject
 
-class FilterByBinUseCase @Inject constructor() {
+open class FilterByBinUseCase @Inject constructor() {
 
     @Inject
-    lateinit var repository: BinListRepository
+    protected lateinit var repository: BinListRepository
 
     @Inject
-    lateinit var converter: Converter
+    protected lateinit var converter: Converter
 
     suspend fun execute(param: FilterByBinParam): FilteredBinsList {
         try {

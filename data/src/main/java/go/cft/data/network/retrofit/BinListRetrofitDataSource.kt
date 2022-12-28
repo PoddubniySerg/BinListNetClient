@@ -7,7 +7,7 @@ import javax.inject.Inject
 class BinListRetrofitDataSource @Inject constructor() : NetworkBinListRepository {
 
     override suspend fun getBinList(url: String): BinListDto? {
-        val responseLoader = BinListRetrofitInstance.MarsPhotosRetrofit
+        val responseLoader = BinListRetrofitInstance.BinListRetrofit
         val response = responseLoader?.getBinList(url)
         if (response != null && response.isSuccessful) return response.body()
         throw RuntimeException(response?.code().toString())
